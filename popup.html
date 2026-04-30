@@ -1,0 +1,86 @@
+<!-- popup.html -->
+<!DOCTYPE html>
+<html lang="en" data-theme="auto">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Task Tracker</title>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+  <div class="container">
+
+    <!-- Toolbar -->
+    <div class="toolbar">
+      <h1 class="title">Tasks <span id="task-count" class="task-count"></span></h1>
+      <div class="toolbar-right">
+        <select id="theme-select" aria-label="Select theme" title="Select theme"></select>
+        <button type="button" id="theme-toggle"
+                class="icon-btn"
+                aria-label="Toggle light/dark"
+                title="Toggle light/dark">
+          <!-- Sun icon (shown in light mode) -->
+          <svg class="fa fa-sun" viewBox="0 0 512 512" width="16" height="16" aria-hidden="true">
+            <path fill="currentColor" d="M256 160a96 96 0 1 1 0 192 96 96 0 1 1 0-192zm0-128c8.8 0 16 7.2 16 16V80c0 8.8-7.2 16-16 16s-16-7.2-16-16V48c0-8.8 7.2-16 16-16zM256 416c8.8 0 16 7.2 16 16v32c0 8.8-7.2 16-16 16s-16-7.2-16-16V432c0-8.8 7.2-16 16-16zM464 240c8.8 0 16 7.2 16 16s-7.2 16-16 16H432c-8.8 0-16-7.2-16-16s7.2-16 16-16h32zM96 256c0 8.8-7.2 16-16 16H48c-8.8 0-16-7.2-16-16s7.2-16 16-16H80c8.8 0 16 7.2 16 16zM403.1 108.9c6.2-6.2 16.4-6.2 22.6 0l22.6 22.6c6.2 6.2 6.2 16.4 0 22.6s-16.4 6.2-22.6 0L403.1 131.5c-6.2-6.2-6.2-16.4 0-22.6zM86.3 403.1c6.2-6.2 16.4-6.2 22.6 0l22.6 22.6c6.2 6.2 6.2 16.4 0 22.6s-16.4 6.2-22.6 0L86.3 425.7c-6.2-6.2-6.2-16.4 0-22.6zM108.9 108.9c6.2-6.2 16.4-6.2 22.6 0l22.6 22.6c6.2 6.2 6.2 16.4 0 22.6s-16.4 6.2-22.6 0L108.9 131.5c-6.2-6.2-6.2-16.4 0-22.6zM425.7 403.1c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6l-22.6 22.6c-6.2 6.2-16.4 6.2-22.6 0s-6.2-16.4 0-22.6l22.6-22.6z"/>
+          </svg>
+          <!-- Moon icon (shown in dark mode) -->
+          <svg class="fa fa-moon" viewBox="0 0 512 512" width="16" height="16" aria-hidden="true">
+            <path fill="currentColor" d="M279.1 512c74.1 0 141-33.6 184.9-86.4c5.8-6.9-1-17.1-9.8-15.1c-15.3 3.6-31.2 5.5-47.7 5.5C291.4 416 208 332.6 208 232.5c0-54.7 19.4-104.9 51.7-144.3c5.5-6.8-.7-16.8-9.2-15.2C117.7 95.7 32 202.1 32 327.9C32 430.5 114.5 512 217.1 512H279.1z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Add Task Form -->
+    <form id="task-form">
+      <input type="text" id="task-input" placeholder="New task..." required autocomplete="off"/>
+      <div class="form-grid">
+        <div>
+          <label for="priority" class="input-label">Priority</label>
+          <select id="priority">
+            <option value="Low">Low</option>
+            <option value="Medium" selected>Medium</option>
+            <option value="High">High</option>
+          </select>
+        </div>
+        <div>
+          <label for="due-date" class="input-label">Due Date</label>
+          <input type="date" id="due-date"/>
+        </div>
+        <button type="submit" class="add-btn">Add</button>
+      </div>
+    </form>
+
+    <!-- Filter -->
+    <label class="filter-label">
+      <input type="checkbox" id="filter-incomplete"/> Show only incomplete
+    </label>
+
+    <!-- Task List -->
+    <ul id="task-list" aria-label="Task list"></ul>
+
+    <!-- Footer Actions -->
+    <div id="actions">
+      <button type="button" id="clear-completed">Clear Completed</button>
+      <button type="button" id="clear-all">Clear All</button>
+    </div>
+
+    <!-- Clear All inline confirmation (hidden by default) -->
+    <div id="confirm-clear" class="confirm-bar" hidden>
+      <span>Delete all tasks?</span>
+      <button type="button" id="confirm-yes" class="confirm-btn danger-btn">Yes, delete</button>
+      <button type="button" id="confirm-no" class="confirm-btn">Cancel</button>
+    </div>
+
+    <!-- Undo toast -->
+    <div id="undo-toast" class="toast" hidden>
+      Task deleted.
+      <button type="button" id="undo-btn" class="toast-btn">Undo</button>
+    </div>
+
+  </div>
+
+  <script src="tasks.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
